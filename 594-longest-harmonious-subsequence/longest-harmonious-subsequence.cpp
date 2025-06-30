@@ -1,18 +1,19 @@
 class Solution {
 public:
     int findLHS(vector<int>& nums) {
-        map<int, int> freq;
-        for(auto it:nums)
-            freq[it]++;
+        int n = nums.size();
         sort(nums.begin(), nums.end());
         int ans = 0;
-        for(int i=1; i<nums.size(); i++)
+        int l=0, r=0;
+        while(r<n)
         {
-            if((nums[i] - nums[i-1]) == 1)
-            {
-                if(ans < freq[nums[i]] + freq[nums[i-1]])
-                    ans = freq[nums[i]] + freq[nums[i-1]];
-            }
+            while(nums[r] - nums[l] > 1)
+                l++;
+            
+            if(nums[r]-nums[l] == 1)
+                ans = max(ans, r-l+1);
+
+            r++;
         }
         return ans;
     }
