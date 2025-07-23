@@ -1,49 +1,27 @@
 class Solution {
-private:
-    int countx(vector<bool> &removed, string s)
-    {
-        stack<pair<int, char>> st;
-        int abpair = 0;
-        for (int i = 0; i < removed.size(); i++) {
-            if (removed[i]) {
-                if (s[i] == 'a') {
-                    st.push({i, s[i]});
-                } else if (s[i] == 'b') {
-                    if (!st.empty() && st.top().second == 'a') {
-                        removed[st.top().first] = false;
-                        removed[i] = false;
-                        st.pop();
-                        abpair++;
-                    }
-                } else {
-                    st = stack<pair<int, char>>(); 
-                }
-            }
-        }
-        return abpair;
-    }
 
-    int county(vector<bool> &removed, string s)
+private:
+    int countsub(vector<bool> &removed, string s, string sub)
     {
         stack<pair<int, char>> st;
-        int bapair = 0;
+        int pairs = 0;
         for (int i = 0; i < removed.size(); i++) {
             if (removed[i]) {
-                if (s[i] == 'b') {
+                if (s[i] == sub[0]) {
                     st.push({i, s[i]});
-                } else if (s[i] == 'a') {
-                    if (!st.empty() && st.top().second == 'b') {
+                } else if (s[i] == sub[1]) {
+                    if (!st.empty() && st.top().second == sub[0]) {
                         removed[st.top().first] = false;
                         removed[i] = false;
                         st.pop();
-                        bapair++;
+                        pairs++;
                     }
                 } else {
                     st = stack<pair<int, char>>(); 
                 }
             }
         }
-        return bapair;
+        return pairs;
     }
 
 public:
@@ -52,11 +30,11 @@ public:
         vector<bool> removed(n, true);
         int ans = 0;
         if (x >= y) {
-            ans += countx(removed, s) * x;
-            ans += county(removed, s) * y;
+            ans += countsub(removed, s, "ab") * x;
+            ans += countsub(removed, s, "ba") * y;
         } else {
-            ans += county(removed, s) * y;
-            ans += countx(removed, s) * x;
+            ans += countsub(removed, s, "ba") * y;
+            ans += countsub(removed, s, "ab") * x;
         }
         return ans;
     }
