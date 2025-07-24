@@ -7,7 +7,7 @@ public:
         for(int num : banned)
             check[num] = true;
         
-        long long sum = 0;
+        int sum = 0;
         int ans = 0;
         for(int i=1; i<=n; i++)
         {
