@@ -15,12 +15,12 @@ public:
             {
                 sum += i;
                 if(sum <= maxSum)
-                {
                     ans++;
-                }
+                else
+                    return ans;
             }
         }
-        
+
         return ans;
     }
 };
