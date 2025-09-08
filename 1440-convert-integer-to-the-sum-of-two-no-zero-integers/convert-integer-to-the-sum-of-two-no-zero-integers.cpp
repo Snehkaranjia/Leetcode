@@ -1,36 +1,26 @@
 class Solution {
 private:
-    bool checkNZ(int n1, int n2)
-    {
-        string num1 = to_string(n1);
-        string num2 = to_string(n2);
-
-        for(auto &ch1 : num1)
-        {
-            if(ch1 == '0')
+    bool checkNZ(int n1, int n2) {
+        while (n1 > 0) {
+            if (n1 % 10 == 0)
                 return false;
+            n1 /= 10;
         }
-
-        for(auto &ch2 : num2)
-        {
-            if(ch2 == '0')
+        while (n2 > 0) {
+            if (n2 % 10 == 0)
                 return false;
+            n2 /= 10;
         }
         return true;
     }
 
 public:
     vector<int> getNoZeroIntegers(int n) {
-        vector<int> ans(2);
-        for(int i=1; i<n; i++)
-        {
-            if(checkNZ(i, n-i))
-            {
-                ans[0] = i;
-                ans[1] = n-i;
-                break;
+        for (int i = 1; i < n; i++) {
+            if (checkNZ(i, n - i)) {
+                return {i,n-i};
             }
         }
-        return ans;
+        return {};
     }
 };
