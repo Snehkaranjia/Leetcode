@@ -5,12 +5,7 @@ private:
     {
         if(idx >= n)
         {
-            vector<int> temp;
-            for(int i=0; i<n; i++)
-            {
-                temp.push_back(nums[i]);
-            }
-            ans.push_back(temp);
+            ans.push_back(nums);
             return;
         }
 
