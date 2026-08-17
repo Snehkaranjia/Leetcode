@@ -12,20 +12,40 @@
 class Solution {
 
 private:
-    void solve(TreeNode* &root, vector<int> &ans)
+    //
+    void recursive(TreeNode* &root, vector<int> &ans)
     {
         if(root == NULL)
             return;
 
         ans.push_back(root->val);
-        solve(root->left, ans);
-        solve(root->right, ans);
+        recursive(root->left, ans);
+        recursive(root->right, ans);
+    }
+
+    void iterative(TreeNode* &root, vector<int> &ans)
+    {
+        stack<TreeNode*> st;
+        if(root == NULL)
+            return;
+        st.push(root);
+        while(!st.empty())
+        {
+            root = st.top();
+            st.pop();
+            ans.push_back(root->val);
+            if(root->right != NULL)
+                st.push(root->right);
+            if(root->left != NULL)
+                st.push(root->left);
+        }
     }
 
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> ans;
-        solve(root, ans);
+        // recursive(root, ans);
+        iterative(root, ans);
         return ans;
     }
 };
