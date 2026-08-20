@@ -8,6 +8,5 @@ public:
         for(auto it : arr2)
             arr1.push_back(it);
         return arr1;
-        return arr1;
     }
 };
