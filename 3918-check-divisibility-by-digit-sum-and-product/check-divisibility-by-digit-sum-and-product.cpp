@@ -3,9 +3,10 @@ public:
     bool checkDivisibility(int n) {
         long long sum=0, prod=1;
         int temp = n;
+        int d = 0;
         while(temp > 0)
         {
-            int d = temp%10;
+            d = temp%10;
             sum += d;
             prod *= d;
             temp = temp/10;
