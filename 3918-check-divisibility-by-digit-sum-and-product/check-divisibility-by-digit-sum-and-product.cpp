@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool checkDivisibility(int n) {
-        long long sum=0, prod=1;
+        int sum=0, prod=1;
         int temp = n;
         int d = 0;
         while(temp > 0)
